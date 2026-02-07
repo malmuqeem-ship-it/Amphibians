@@ -1,4 +1,4 @@
-<!doctype html>
+!doctype html>
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8">
@@ -6,64 +6,76 @@
 <title>صح أم خطأ – الضفدع والعلجوم</title>
 
 <style>
-html, body {
-  width:100%;
-  height:100%;
-  margin:0;
-}
+html, body { width:100%; height:100%; }
 
 body{
+  margin:0;
   font-family:"Noto Kufi Arabic", sans-serif;
-  background: linear-gradient(#e6f2ef, #cfe3dd);
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-  color:#203228;
+  background:linear-gradient(#f6f1e7,#e5d6b8);
+  display:flex;justify-content:center;align-items:center;
+  min-height:100vh;text-align:center;color:#203228;
 }
 
 main{
-  background: rgba(255,255,255,0.95);
-  padding:24px 28px;
+  background:rgba(255,255,255,.94);
+  padding:24px 30px;
   border-radius:18px;
   box-shadow:0 6px 16px rgba(0,0,0,.15);
-  width:92%;
-  max-width:650px;
+  width:90%;max-width:650px;
 }
 
 h1{
   color:#2f6f4f;
   font-size:22px;
-  margin-bottom:12px;
+  margin-bottom:10px;
 }
 
 #question{
   font-size:20px;
+  line-height:1.8;
   margin:14px 0;
-  line-height:1.7;
 }
 
 button{
   margin:8px;
   padding:12px 20px;
-  border:0;
-  border-radius:10px;
+  border:0;border-radius:10px;
   cursor:pointer;
-  font-size:18px;
-  font-weight:700;
+  font-size:18px;font-weight:700;
 }
 
-.true{ background:#3a9d6b; color:#fff; }
-.false{ background:#c94f4f; color:#fff; }
+.b-true{ background:#2d9d62;color:#fff; }
+.b-false{ background:#c85151;color:#fff; }
 
 #feedback{
-  display:none;
   margin-top:12px;
-  padding:10px;
-  background:#fff;
+  padding:12px;
   border-radius:10px;
-  border:1px solid #ddd;
-  line-height:1.7;
+  display:none;
+  background:#fff;
+  border:1px solid #e6dec9;
+  text-align:right;
+  line-height:1.9;
+}
+
+.tag{
+  display:inline-block;
+  padding:4px 12px;
+  border-radius:999px;
+  font-weight:800;
+  margin-bottom:8px;
+}
+
+.ok{
+  background:#e8f7ef;
+  color:#1f7a4a;
+  border:1px solid #bfe8d0;
+}
+
+.bad{
+  background:#fdecec;
+  color:#a83333;
+  border:1px solid #f1bcbc;
 }
 
 #nextBtn{
@@ -79,7 +91,7 @@ button{
 
 #end{
   display:none;
-  margin-top:16px;
+  margin-top:15px;
 }
 </style>
 </head>
@@ -89,20 +101,20 @@ button{
 
 <h1>صح أم خطأ – الضفدع والعلجوم</h1>
 
-<p id="question">اضغطي «ابدئي» لعرض أول سؤال</p>
+<p id="question">اضغطي "ابدئي" لعرض أول سؤال</p>
 
 <div>
-  <button class="true" id="btnTrue" disabled>صح</button>
-  <button class="false" id="btnFalse" disabled>خطأ</button>
+  <button class="b-true" id="btnTrue" disabled>صح</button>
+  <button class="b-false" id="btnFalse" disabled>خطأ</button>
 </div>
 
 <div id="feedback"></div>
 
-<button id="nextBtn">التالي</button>
+<button id="nextBtn">التالي ↻</button>
 <button id="startBtn">ابدئي ▶</button>
 
 <div id="end">
-  <h3>🎉 انتهت اللعبة</h3>
+  <h3>انتهت اللعبة 🎉</h3>
   <p>نتيجتك: <span id="score"></span> من 4</p>
   <button onclick="location.reload()">إعادة</button>
 </div>
@@ -112,24 +124,24 @@ button{
 <script>
 const questions = [
   {
-    q: "العلجوم يحتاج إلى الماء طوال فترة حياته.",
+    q: "العلجوم يحتاج إلى الماء طوال فترة حياته",
     a: false,
-    ex: "❌ خطأ: العلجوم يحتاج إلى الماء فقط خلال فترة التزاوج لوضع البيض."
+    ex: ".العلجوم لا يحتاج إلى الماء طوال حياته مثل الضفدع، بل يعود إلى الماء خلال فترة التزاوج فقط لوضع البيض"
   },
   {
-    q: "جلد الضفدع أملس وعليه مادة مخاطية.",
+    q: "جلد الضفدع أملس وعليه مادة مخاطية",
     a: true,
-    ex: "✅ صح: الجلد الأملس والمخاطي يساعد الضفدع على التنفّس عبر الجلد."
+    ex: ".جلد الضفدع أملس ورطب ومغطّى بمادة مخاطية تساعده على التنفّس عبر الجلد"
   },
   {
     q: "البرمائي الذي يبدو نحيلًا مع أطراف أطول هو في الغالب ضفدع.",
     a: true,
-    ex: "✅ صح: الضفدع نحيل وله أطراف خلفية طويلة للقفز والسباحة."
+    ex: "الضفدع نحيل الجسم وله أطراف خلفية طويلة تساعده على القفز والسباحة، بينما العلجوم يكون أكثر امتلاءً وأطرافه أقصر نسبيًا"
   },
   {
-    q: "عين العلجوم كبيرة وبارزة وخارج الرأس.",
+    q: "عين العلجوم كبيرة وبارزة وخارج الرأس",
     a: false,
-    ex: "❌ خطأ: عين العلجوم أصغر وأقل بروزًا من الضفدع، ولديه غدة سامة خلف العينين."
+    ex: "عين العلجوم أصغر وأقل بروزًا من عين الضفدع، ويتميّز العلجوم بوجود غدة سامة خلف العينين"
   }
 ];
 
@@ -143,50 +155,54 @@ const fBtn = document.getElementById("btnFalse");
 const nextBtn = document.getElementById("nextBtn");
 const startBtn = document.getElementById("startBtn");
 const endBox = document.getElementById("end");
-const scoreEl = document.getElementById("score");
+
+function startGame(){
+  startBtn.style.display = "none";
+  showQuestion();
+}
 
 function showQuestion(){
   index++;
-  if(index >= questions.length){
-    endGame();
-    return;
-  }
-  qEl.textContent = questions[index].q;
+  if(index >= questions.length){ endGame(); return; }
+
+  const cur = questions[index];
+  qEl.textContent = cur.q;
   fb.style.display = "none";
-  tBtn.disabled = false;
-  fBtn.disabled = false;
+  fb.innerHTML = "";
+  tBtn.disabled = fBtn.disabled = false;
   nextBtn.style.display = "none";
 }
 
-function answer(val){
+function check(ans){
   const cur = questions[index];
+  const correct = ans === cur.a;
+
+  const title = correct
+    ? `<div class="tag ok">إجابة صحيحة ✅</div>`
+    : `<div class="tag bad">إجابة خاطئة ❌</div>`;
+
   fb.style.display = "block";
-  fb.textContent = cur.ex;
-  if(val === cur.a) score++;
-  tBtn.disabled = true;
-  fBtn.disabled = true;
+  fb.innerHTML = `${title}<div>${cur.ex}</div>`;
+
+  if(correct) score++;
+
+  tBtn.disabled = fBtn.disabled = true;
   nextBtn.style.display = "inline-block";
 }
 
 function endGame(){
   qEl.textContent = "أحسنتِ! انتهت الأسئلة.";
-  tBtn.style.display = "none";
-  fBtn.style.display = "none";
-  nextBtn.style.display = "none";
-  startBtn.style.display = "none";
+  tBtn.style.display = fBtn.style.display = nextBtn.style.display = startBtn.style.display = "none";
   fb.style.display = "none";
   endBox.style.display = "block";
-  scoreEl.textContent = score;
+  document.getElementById("score").textContent = score;
 }
 
-tBtn.onclick = () => answer(true);
-fBtn.onclick = () => answer(false);
+tBtn.onclick = () => check(true);
+fBtn.onclick = () => check(false);
 nextBtn.onclick = showQuestion;
-startBtn.onclick = () => {
-  startBtn.style.display = "none";
-  showQuestion();
-};
+startBtn.onclick = startGame;
 </script>
 
 </body>
-</html>
+</html
